@@ -16,24 +16,26 @@ private int pantallas;
 	}
 	
 	
-	public void pintar(){
+	public void pintar(int x, int y){
 		switch (pantallas) {
 		case 0:
 			app.image(mundo.imgs[5],600,350);
-			if( ((app.mouseX>393) && (app.mouseX<510)) && ((app.mouseY>510) && (app.mouseY<660)) ){
+			if( ((x>393) && (x<510)) && ((y>510) && (y<660)) ){
 				app.image(mundo.imgs[7],600,350);
-				
-			}else {app.image(mundo.imgs[7],600,350);}
-		
+			}
+			if( ((x>588) && (x<852)) && ((y>510) && (y<660)) ){
+				app.image(mundo.imgs[6],600,350);
+			}	
 			
-			app.image(mundo.imgs[6],600,350);
 	
 			break;
 			
 		case 1:
 			app.image(mundo.imgs[8], 600, 350);
-			app.image(mundo.imgs[9], 600, 350);
 			
+			if( ((x>999) && (x<1113)) && ((y>523) && (y<664)) ){
+				app.image(mundo.imgs[9], 600, 350);
+			}
 			break;
 
 		case 2:
@@ -49,6 +51,7 @@ private int pantallas;
 		if(pantallas==0){
 		if( ((x>393) && (x<510)) && ((y>510) && (y<660)) ){
 			pantallas=2;
+			mundo.agregarEspecimenes();
 		}
 		if( ((x>588) && (x<852)) && ((y>510) && (y<660)) ){
 			pantallas=1;

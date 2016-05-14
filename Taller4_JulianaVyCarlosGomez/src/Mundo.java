@@ -100,7 +100,7 @@ habilidades();
 	
 	public void agregarEspecimenes(){
 		for (int i = 0; i < NUM_CAZADORES; i++) {
-			zorrines.add(new Zorro(this, imgs[(int)app.random(1 , 2)]));
+			zorrines.add(new Zorro(this, imgs[(int)app.random(1 , 3)]));
 		}
 		for (int i = 0; i < NUM_PRESAS; i++) {
 			conejines.add(new Conejo(this, app,imgs[4] ));

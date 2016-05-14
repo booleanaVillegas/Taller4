@@ -10,7 +10,7 @@ public class MainApp extends PApplet {
    
    public void draw(){
 	   background(255);
-	   log.pintar();
+	   log.pintar(mouseX,mouseY);
    }
    
    
