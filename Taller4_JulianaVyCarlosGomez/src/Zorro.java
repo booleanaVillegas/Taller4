@@ -47,6 +47,7 @@ public class Zorro extends Thread{
 
 		mundo.app.image(img, posiciones.x, posiciones.y);
         // tiempo restante de la habilidad sostener zorro
+		mundo.app.fill(0);
 		if(seleccionado){
 			mundo.app.text(temp, posiciones.x, posiciones.y-40);
 		}

@@ -56,6 +56,7 @@ private int pantallas;
 		}
 		if(pantallas==1){
 			if( ((x>999) && (x<1113)) && ((y>523) && (y<664)) ){
+				mundo.agregarEspecimenes();
 				pantallas=2;
 			}
 		}

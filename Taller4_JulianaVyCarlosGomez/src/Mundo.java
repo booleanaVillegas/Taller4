@@ -8,7 +8,7 @@ public class Mundo{
 	public LinkedList<Zorro> zorrines;
 	public LinkedList<Conejo> conejines;
 	public LinkedList<zanahoria> zanahorias;
-	
+
 	private final int NUM_PRESAS = 6; 
 	private final int NUM_CAZADORES = 2;
 	public int EnfriamientoDormirConejo=0;
@@ -23,6 +23,7 @@ public class Mundo{
 	PImage[] imgs =new PImage[15];
 	
 	public Mundo(PApplet app) {
+		
 	zorrines= new LinkedList<Zorro>();
 	conejines= new LinkedList<Conejo>();
 	zanahorias= new LinkedList<zanahoria>();
@@ -31,7 +32,9 @@ public class Mundo{
 	for (int i = 0; i < imgs.length; i++) {
 		imgs[i]= app.loadImage("../data/img-"+(i+1)+".png");
 	}
-	agregarEspecimenes();
+	
+	
+		
 
 	}
 	
@@ -95,7 +98,7 @@ habilidades();
 	
 	
 	
-	private void agregarEspecimenes(){
+	public void agregarEspecimenes(){
 		for (int i = 0; i < NUM_CAZADORES; i++) {
 			zorrines.add(new Zorro(this, imgs[(int)app.random(1 , 2)]));
 		}
@@ -149,4 +152,6 @@ agregarZanhoria();
 		}
 		
 	}
+	
+	 
 }
