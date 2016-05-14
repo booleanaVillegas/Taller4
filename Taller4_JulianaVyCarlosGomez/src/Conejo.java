@@ -50,7 +50,7 @@ public class Conejo extends Thread{
 	}
 	public void press(int x, int y){
 		if(mundo.EnfriamientoDormirConejo==0){
-		if(PApplet.dist(x, y, posiciones.x, posiciones.y)<20){
+		if(PApplet.dist(x, y, posiciones.x, posiciones.y)<50){
 			dormir=2000;
 			millis=app.millis();
 			

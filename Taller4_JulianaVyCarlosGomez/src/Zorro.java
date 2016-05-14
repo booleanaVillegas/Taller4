@@ -108,7 +108,7 @@ public class Zorro extends Thread{
 	public void press(int x, int y){
 		for (Zorro zorros : mundo.zorrines) {
 			if(zorros!=this){
-			if((PApplet.dist(x, y, posiciones.x, posiciones.y)<20) && zorros.seleccionado==false && mundo.EnfriamientoMoverZorro==0){
+			if((PApplet.dist(x, y, posiciones.x, posiciones.y)<50) && zorros.seleccionado==false && mundo.EnfriamientoMoverZorro==0){
 				seleccionado=true;
 				millis=mundo.app.millis();
 				temp=3;
