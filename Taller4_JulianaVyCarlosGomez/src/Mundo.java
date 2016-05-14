@@ -107,16 +107,17 @@ habilidades();
 		}
 	}
 	private void comerZanahoria(){
-		for (Iterator iterator = conejines.iterator(); iterator.hasNext();) {
-			Conejo conejo = (Conejo) iterator.next();
-			for (Iterator iterator2 = zanahorias.iterator(); iterator2.hasNext();) {
-				zanahoria z = (zanahoria) iterator2.next();
+		for (int i = 0; i < conejines.size(); i++) {
+			Conejo conejo = conejines.get(i);
+			for (int j = 0; j < zanahorias.size(); j++) {
+				zanahoria z = zanahorias.get(j);
 				if(PApplet.dist(conejo.posiciones.x, conejo.posiciones.y, z.posiciones.x, z.posiciones.y)<25){
 					zanahorias.remove(z);
 					conejines.add(new Conejo(this, app, imgs[4]));
 				}
 			}
-		}
+			
+		}		
 		
 	}
 	private void agregarZanhoria(){
