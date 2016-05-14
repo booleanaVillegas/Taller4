@@ -8,7 +8,7 @@ public class Mundo{
 	public LinkedList<Zorro> zorrines;
 	public LinkedList<Conejo> conejines;
 	public LinkedList<zanahoria> zanahorias;
-	private int width, height, tDescanso;
+	
 	private final int NUM_PRESAS = 6; 
 	private final int NUM_CAZADORES = 2;
 	public int EnfriamientoDormirConejo=0;
@@ -36,7 +36,7 @@ public class Mundo{
 	}
 	
 	public void pintar(){
-app.image(imgs[0],0,0);
+app.image(imgs[0],600,350);
 app.noCursor();
 app.image(imgs[11],app.mouseX,app.mouseY);
 

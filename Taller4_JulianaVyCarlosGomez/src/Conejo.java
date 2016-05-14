@@ -17,6 +17,7 @@ public class Conejo extends Thread{
 	private PImage img;
 
 	PApplet app;
+	private boolean huyendo;
 	public Conejo(Mundo mundo, PApplet app, PImage img) {
 		this.mundo = mundo;
 		this.img=img;
@@ -41,6 +42,7 @@ public class Conejo extends Thread{
 				mover();
 				dormido();
 				sleep(tDescanso+dormir);
+				limites();
 			} catch (InterruptedException e) {			
 				vida = false;				
 			}
@@ -70,51 +72,54 @@ public class Conejo extends Thread{
 		}
 	}
 	private void mover() {
-		aceleracion = new PVector(app.random(-1, 1), app.random(-1, 1));
-		velocidad.add(aceleracion);
-		posiciones.add(velocidad);
+		aceleracion = new PVector(app.random(-1, 1), app.random(-1, 1));		
 		velocidad.limit(5);
 		for (int i = 0; i < mundo.zanahorias.size(); i++) {
 			zanahoria zanahorin = mundo.zanahorias.get(i);
-			float angulo=PApplet.atan2(zanahorin.posiciones.y-posiciones.y, zanahorin.posiciones.x-posiciones.x);
-			if (PApplet.dist(posiciones.x, posiciones.y, zanahorin.posiciones.x, zanahorin.posiciones.y) < 200) {
-				posiciones.x = (int) (posiciones.x + (PApplet.cos(angulo) * (velocidad.x * 2)));
-				posiciones.y = (int) (posiciones.y + (PApplet.sin(angulo) * (velocidad.y * 2)));
-				
+		
+			if (PVector.dist(posiciones, zanahorin.posiciones) < 200 && !huyendo) {
+				aceleracion=PVector.sub(zanahorin.posiciones,posiciones);
+				aceleracion.setMag(0.5F);
+				velocidad.add(aceleracion);
+				posiciones.add(velocidad);
 			}
 		}
-		
 		for (int i = 0; i < mundo.zorrines.size(); i++) {
-			// calcula la direccion al cazador y la invierte para huir
-			Zorro c = mundo.zorrines.get(i);			
-			float angulo = PApplet.atan2(c.posiciones.y-posiciones.y, c.posiciones.x-posiciones.x);
-			angulo+= PApplet.PI;
-			
-			// si la distancia es menor a 150 huye!! sino solo se mueve por el lienzo
-			if( PApplet.dist(posiciones.x, posiciones.y, c.posiciones.x, c.posiciones.y) < 150 ){
-				posiciones.x = ((float) (posiciones.x + (PApplet.cos(angulo)*velocidad.x))+3);
-				posiciones.y =  ((float) (posiciones.y + (PApplet.sin(angulo)*velocidad.y))+3);	
-				// si el cazador le ha atrapado interrumpe el hilo y esto lleva a la muerte a la presa
-				if(PApplet.dist(posiciones.x, posiciones.y, c.posiciones.x, c.posiciones.y)<25 && !c.seleccionado){
-					interrupt();
-				}				
-			}else{
+			Zorro z = mundo.zorrines.get(i);
+			if(PVector.dist(posiciones, z.posiciones)<100){
+				aceleracion= PVector.sub(posiciones,z.posiciones);
 				
-				posiciones.x = (float) (posiciones.x + (-1 + Math.random()*3));
-				posiciones.y = (short) (posiciones.y + (-1 + Math.random()*3));	
-				if(posiciones.x>mundo.app.width){
-					posiciones.x = 0;
-				}
-				if(posiciones.x<0){
-					posiciones.x =  mundo.app.width;
-				}
-				if(posiciones.y>mundo.app.height){
-					posiciones.y = 0;
-				}
-				if(posiciones.y<0){
-					posiciones.y = (mundo.app.height);
-				}
-			}
+				aceleracion.setMag(0.05F);
+				velocidad.add(aceleracion);
+				
+				
+					posiciones.add(velocidad);
+			
+				huyendo=true;
+			}else {huyendo=false;}
+		}
+		
+		
+		
+		if(!huyendo){
+			velocidad.add(aceleracion);
+			posiciones.add(velocidad);
+		}
+		
+
+	}
+	private void limites(){
+		if(posiciones.x>mundo.app.width+5){
+			posiciones.x = 0;
+		}
+		if(posiciones.x<-5){
+			posiciones.x =  mundo.app.width;
+		}
+		if(posiciones.y>mundo.app.height+5){
+			posiciones.y = 0;
+		}
+		if(posiciones.y<-5){
+			posiciones.y = mundo.app.height;
 		}
 	}
 

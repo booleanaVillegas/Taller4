@@ -5,6 +5,7 @@ public class MainApp extends PApplet {
    public void setup(){
 	   size(1200,700);
 	   log= new Logica(this);
+	   imageMode(CENTER);
    }
    
    public void draw(){

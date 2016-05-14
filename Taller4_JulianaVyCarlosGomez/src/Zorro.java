@@ -8,6 +8,7 @@ public class Zorro extends Thread{
 	public PVector posiciones;
 	private PVector velocidad;
 	public PVector aceleracion;
+	private PVector destino;
 	private Mundo mundo;
 	private long tDescanso;
 	private boolean vida;
@@ -17,6 +18,7 @@ public class Zorro extends Thread{
 	public boolean seleccionado;
 	private int millis;
 	private short temp;
+	  Conejo criaturitaBlanca;
 	public Zorro(Mundo mundo, PImage img) {
 		this.mundo = mundo;
 		this.img=img;
@@ -59,6 +61,7 @@ public class Zorro extends Thread{
 				}
 				temporizar();
 				limites();
+				buscarVictima();
 				sleep(tDescanso);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -67,40 +70,39 @@ public class Zorro extends Thread{
 	}
 
 	private void mover() {
+		aceleracion = new PVector(mundo.app.random(-1, 1), mundo.app.random(-1, 1));		
+		velocidad.limit(5);
+
+		if(cazando){
+			aceleracion= PVector.sub(destino, posiciones);
+			aceleracion.setMag(0.5F);
+			velocidad.add(aceleracion);
+			
+			
+				posiciones.add(velocidad);
+				if (PVector.dist(posiciones, destino) < 15) {
+					mundo.conejines.remove(criaturitaBlanca);
+					cazando = false;
+				}
+			}
+		if(!cazando){
+				velocidad.add(aceleracion);
+				posiciones.add(velocidad);
+		}
+	
+	}
+	private void buscarVictima(){
 		
 		for (int i = 0; i < mundo.conejines.size(); i++) {
-			// Calcula la direccion hacia la presa
-			Conejo p = mundo.conejines.get(i);
-			direccion = PApplet.atan2(p.posiciones.y - posiciones.y, p.posiciones.x - posiciones.x);
-			// Verifica la distancia hacia la presa y si está viva para perseguirla o moverse por el linezo
-			if (PApplet.dist(posiciones.x, posiciones.y, p.posiciones.x, p.posiciones.y) < 150 && p.vida) {
+			Conejo c = mundo.conejines.get(i);
+			if(PApplet.dist(posiciones.x, posiciones.y, c.posiciones.x, c.posiciones.y)<100){
+				criaturitaBlanca=c;
 				cazando=true;
-				posiciones.x = (int) (posiciones.x + (PApplet.cos(direccion) * (velocidad.x * 1)));
-				posiciones.y = (int) (posiciones.y + (PApplet.sin(direccion) * (velocidad.y * 1)));
-			} else {
-				cazando=false;
-			}
-			
-			
-			
-			 
+				
+				destino=c.posiciones;
+				break;
+			}else{cazando=false; criaturitaBlanca=null;}
 		}
-			if(cazando==false) {
-//				aceleracion = new PVector(mundo.app.random(-1, 1), mundo.app.random(-1, 1));
-//				velocidad.add(aceleracion);
-//				
-//				
-//				
-//				
-//				posiciones.add(velocidad);
-				posiciones.x = (int) (posiciones.x + mundo.app.random(-1,3));
-				posiciones.y = (int) (posiciones.y +  mundo.app.random(-1,3));
-			}
-			
-			
-			
-
-			
 		
 	}
 	public void press(int x, int y){
