@@ -44,7 +44,9 @@ private int pantallas;
 			if (mundo.conejines.size()==0){
 				app.image(mundo.imgs[12],600, 350);			;
 			}
-			
+			if( mundo.conejines.size()==0 && ((x>538) && (x<685)) && ((y>506) && (y<637)) ){
+			app.image(mundo.imgs[13], 600, 350);
+			}
 			break;
 		
 		}
@@ -54,7 +56,7 @@ private int pantallas;
 		if(pantallas==0){
 		if( ((x>393) && (x<510)) && ((y>510) && (y<660)) ){
 			pantallas=2;
-			mundo.agregarEspecimenes();
+			//mundo.agregarEspecimenes();
 		}
 		if( ((x>588) && (x<852)) && ((y>510) && (y<660)) ){
 			pantallas=1;
@@ -66,6 +68,15 @@ private int pantallas;
 				pantallas=2;
 			}
 		}
+			if(pantallas==2 && mundo.conejines.size()==0){
+			if( ((x>538) && (x<685)) && ((y>506) && (y<637)) ){
+				mundo.zorrines.clear();
+				mundo.agregarEspecimenes();
+				mundo.conejosMuertos=0;
+				mundo.zanahorias.clear();
+				}
+			}
+		
 		app.println(x,y);
 		mundo.press(x,y);
 	}

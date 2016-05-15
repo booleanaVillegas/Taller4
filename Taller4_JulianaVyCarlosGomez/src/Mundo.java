@@ -10,7 +10,7 @@ public class Mundo{
 	public LinkedList<Conejo> conejines;
 	public LinkedList<zanahoria> zanahorias;
 
-	private final int NUM_PRESAS = 2; 
+	private final int NUM_PRESAS = 4; 
 	private final int NUM_CAZADORES = 4;
 	public int EnfriamientoDormirConejo=0;
 	public boolean DormirConejo;
@@ -23,7 +23,7 @@ public class Mundo{
 	PApplet app;
 	PImage[] imgs =new PImage[16];
 	PFont fuente;
-	int conejosMuertos;
+	public int conejosMuertos;
 	
 	public Mundo(PApplet app) {
 	fuente= app.createFont("../data/Roboto-Light.ttf", 20);	
@@ -99,11 +99,11 @@ app.text(conejosMuertos,330, 35);
 			
 		app.textFont(fuente,30);
 		app.fill(100);
-		app.text("EL CONEJO DORMIRA POR : "+EnfriamientoDormirConejo+ " seg", 100, 100);
-		app.text("PUEDES ARRASTRAR EL ZORRO POR : "+EnfriamientoMoverZorro+ " seg", 100, 150);
+		app.text("PUEDES VOLVER A DESCONGELAR EL CONEJO EN : "+EnfriamientoDormirConejo+ " seg", 100, 100);
+		app.text("PUEDES VOLVER A ARRASTRAR EL ZORRO POR : "+EnfriamientoMoverZorro+ " seg", 100, 150);
 		app.fill(255);
-		app.text("EL CONEJO DORMIRA POR : "+EnfriamientoDormirConejo+ " seg", 102, 102);
-		app.text("PUEDES ARRASTRAR EL ZORRO POR : "+EnfriamientoMoverZorro+ " seg", 102, 152);
+		app.text("PUEDES VOLVER A DESCONGELAR EL CONEJO EN :"+EnfriamientoDormirConejo+ " seg", 102, 102);
+		app.text("PUEDES VOLVER A ARRASTRAR EL ZORRO POR : "+EnfriamientoMoverZorro+ " seg", 102, 152);
 	}
 	
 	
