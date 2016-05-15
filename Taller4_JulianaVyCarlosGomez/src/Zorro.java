@@ -19,6 +19,7 @@ public class Zorro extends Thread{
 	private int millis;
 	private short temp;
 	  Conejo criaturitaBlanca;
+	private static int muertos;
 	public Zorro(Mundo mundo, PImage img) {
 		this.mundo = mundo;
 		this.img=img;
@@ -83,6 +84,7 @@ public class Zorro extends Thread{
 				posiciones.add(velocidad);
 				if (PVector.dist(posiciones, destino) < 15) {
 					mundo.conejines.remove(criaturitaBlanca);
+					muertos++;
 					cazando = false;
 				}
 			}
@@ -166,7 +168,9 @@ public class Zorro extends Thread{
 		
 	}
 
-	
+	public static int coMuertos(){
+	return muertos;
+	}
 
 	
 }

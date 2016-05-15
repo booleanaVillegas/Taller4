@@ -41,10 +41,13 @@ private int pantallas;
 		case 2:
 			mundo.pintar();
 			mundo.cosas();
+			if (mundo.conejines.size()==0){
+				app.image(mundo.imgs[12],600, 350);			;
+			}
 			
 			break;
-		}
 		
+		}
 	}
 	
 	public void press (int x, int y) {

@@ -14,13 +14,14 @@ public class Conejo extends Thread{
 	private int dormir;
 	public boolean dormido;
 	private int millis;
-	private PImage img;
+	private PImage img, img2;
 
 	PApplet app;
 	private boolean huyendo;
-	public Conejo(Mundo mundo, PApplet app, PImage img) {
+	public Conejo(Mundo mundo, PApplet app, PImage img, PImage img2) {
 		this.mundo = mundo;
 		this.img=img;
+		this.img2=img2;
 		posiciones= new PVector();
 		posiciones.set((float)(Math.random()*mundo.app.height),(float)(Math.random()*mundo.app.height));
 		velocidad= new PVector();
@@ -34,7 +35,11 @@ public class Conejo extends Thread{
 	}
 	
 	public void pintar() {
-		app.image(img, posiciones.x, posiciones.y);		
+		if (dormido){
+		app.image(img2, posiciones.x, posiciones.y);	
+		}else {
+		app.image(img, posiciones.x, posiciones.y);	
+		}
 	}
 	public void run() {
 		while(vida){
